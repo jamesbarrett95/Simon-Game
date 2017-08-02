@@ -9,6 +9,8 @@ const pods = document.querySelectorAll('.pod')
 let sequence = []
 let playerIndex = 0
 let level = 1
+// A set flag that, once set to true, will halt the execution of getPattern()
+let cancelled = false
 
 function alterPods (action) {
   if (action) {
@@ -57,6 +59,7 @@ function getPattern (sequence) {
   let localSequence = [...sequence]
 
   function addClassAfterTwoSeconds (el) {
+    if (cancelled) return
     return new Promise(resolve => {
         setTimeout(_ => {
             el.classList.add('playing')
@@ -97,9 +100,17 @@ function power () {
   if (this.checked) {
     options.classList.add('visible')
     options.classList.remove('hidden')
+    startButton.style.pointerEvents = 'auto'
+    cancelled = false
   } else {
     options.classList.remove('visible')
     options.classList.add('hidden')
+    startButton.style.pointerEvents = 'none'
+    counter.textContent = '-'
+    cancelled = true
+    sequence = []
+    playerIndex = 0
+    level = 1
   }
 }
 
