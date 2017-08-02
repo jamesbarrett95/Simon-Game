@@ -10,18 +10,18 @@ let sequence = []
 let playerIndex = 0
 let level = 1
 
-function activatePods () {
-  pods.forEach(function (pod) {
-    pod.style.pointerEvents = 'auto'
-    pod.style.cursor = 'pointer'
-  })
-}
-
-function disablePods () {
-  pods.forEach(function (pod) {
-    pod.style.pointerEvents = 'none'
-    pod.style.cursor = 'default'
-  })
+function alterPods (action) {
+  if (action) {
+    pods.forEach(function (pod) {
+      pod.style.pointerEvents = 'auto'
+      pod.style.cursor = 'pointer'
+    })
+  } else {
+    pods.forEach(function (pod) {
+      pod.style.pointerEvents = 'none'
+      pod.style.cursor = 'default'
+    })
+  }
 }
 
 function removePlaying (e) {
@@ -35,19 +35,18 @@ function checkUserSequence () {
     console.log('selection correct!')
   } else {
     console.log('incorrect!')
-    disablePods()
+    alterPods(false)
     getPattern(sequence)
     playerIndex = 0
   }
 
   if (playerIndex === sequence.length) {
-    disablePods()
+    alterPods(false)
     console.log('level up!')
     counter.textContent++
     level++
     playerIndex = 0
-    sequence = []
-    getRandomPods()
+    getRandomPod()
   }
 
   this.classList.add('playing')
@@ -72,24 +71,22 @@ function getPattern (sequence) {
   }
 
   addClassesSequentially(localSequence).then(_ => {
-    activatePods()
+    alterPods(true)
   })
 }
 
-function getRandomPods () {
-  for (let i = 0; i < level; i++) {
-    const indexOfPod = Math.floor(Math.random() * pods.length)
-    const randomPod = pods[indexOfPod]
-    sequence.push(randomPod)
-  }
+function getRandomPod () {
+  const indexOfPod = Math.floor(Math.random() * pods.length)
+  const randomPod = pods[indexOfPod]
+  sequence.push(randomPod)
   getPattern(sequence)
 }
 
 function startGame () {
   counter.textContent === '-' ? counter.textContent = '1' : textContent++
   this.style.pointerEvents = 'none'
-  disablePods()
-  getRandomPods()
+  alterPods(false)
+  getRandomPod()
 }
 
 function enableStrict () {
