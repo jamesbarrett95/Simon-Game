@@ -13,6 +13,7 @@
 
 <body>
   <div class="simon-container">
+
     <div class="row">
       <div class="pod green"></div>
       <div class="pod red"></div>
@@ -21,28 +22,29 @@
       <div class="pod yellow"></div>
       <div class="pod blue"></div>
     </div>
+
     <div class="central">
       <h1>Simon Game</h1>
       <div class="options">
         <div class="option">
-          <p class="counter">1</p>
+          <p class="counter">-</p>
           <small>Count</small>
         </div>
         <div class="option">
-          <button type="button" name="button">Start</button>
+          <div id="start" class="btn btn-red"></div>
           <small>Start</small>
         </div>
         <div class="option">
-          <p class="strict">On</p>
+          <div class="toggled"></div>
+          <div id="strict" class="btn btn-yellow"></div>
           <small>Strict</small>
         </div>
       </div>
-      <div class="power">
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
-      </div>
+
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
     </div>
   </div>
   <script type="text/javascript" src="app.js"></script>

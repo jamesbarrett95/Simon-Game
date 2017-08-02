@@ -47,13 +47,26 @@ html, body {
   left: 125px;
 }
 
-.options,
-.option {
+.options {
   display: flex;
+  visibility: hidden;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: space-around;
+  -webkit-transition: visibility 1s, opacity 1s linear;
+  -moz-transition: visibility 1s, opacity 1s linear;
+  -ms-transition: visibility 1s, opacity 1s linear;
+  -o-transition: visibility 1s, opacity 1s linear;
 }
 
-.options {
-  margin-bottom: 15px;
+.options.visible {
+  visibility: visible;
+  opacity: 1
+}
+
+.options.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .option > :last-child {
@@ -61,23 +74,49 @@ html, body {
 }
 
 .option {
+  display: flex;
   flex-direction: column;
   margin-left: 5px;
   margin-right: 5px;
+  align-items: center;
 }
 
-.counter {
-  margin: 0;
+.btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #000
 }
 
-.strict {
+.toggled {
+  background: #000;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.toggled.enabled {
+  background: green;
+}
+
+.btn-red {
+  background: red;
+}
+
+.btn-yellow {
+  background: gold;
+}
+
+.strict, .counter {
   margin: 0;
 }
 
 .pod {
   flex-grow: 1;
+  transition: all .5s ease;
+  pointer-events: none;
 }
-
 
 /* The switch - the box around the slider */
 .switch {
@@ -142,23 +181,39 @@ input:checked + .slider:before {
 
 /* DIV Colours */
 .green {
-  background: green;
+  background: rgba(0, 255, 0, 0.7);
   border-top-left-radius: 100%;
   margin-right: 10px;
 }
 
+.green.playing {
+  background: #13ff7c;
+}
+
 .red {
-  background: red;
+  background: rgba(255, 0, 0, 0.7);
   border-top-right-radius: 100%;
 }
 
+.red.playing {
+  background: #ff4c4c;
+}
+
 .yellow {
-  background: yellow;
+  background: rgba(255, 255, 0, 0.7);
   border-bottom-left-radius: 100%;
   margin-right: 10px;
 }
 
+.yellow.playing {
+  background: #fed93f;
+}
+
 .blue {
-  background: blue;
+  background-color: rgba(0, 0, 255, 0.7);
   border-bottom-right-radius: 100%;
+}
+
+.blue.playing {
+  background: #1c8cff;
 }
